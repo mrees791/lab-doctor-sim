@@ -1,20 +1,18 @@
 package doctorsim.models;
 
+import java.util.ArrayList;
+
 public class Patient {
-    private ToolType[] toolsRequired;
+    private ArrayList<ToolType> toolsRequired;
     private long timeToTreatMs;
     
-    public Patient(long timeToTreatMs, ToolType[] toolsRequired) {
+    public Patient(long timeToTreatMs, ArrayList<ToolType> toolsRequired) {
         this.timeToTreatMs = timeToTreatMs;
         this.toolsRequired = toolsRequired;
     }
 
-    public ToolType[] getToolsRequired() {
+    public ArrayList<ToolType> getToolsRequired() {
         return toolsRequired;
-    }
-
-    public void setToolsRequired(ToolType[] toolsRequired) {
-        this.toolsRequired = toolsRequired;
     }
 
     public long getTimeToTreatMs() {

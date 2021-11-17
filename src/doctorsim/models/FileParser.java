@@ -71,23 +71,23 @@ public class FileParser {
 	private Patient ParsePatientLine(BufferedReader reader) throws NumberFormatException, IOException {
 		String[] lineSplits = reader.readLine().split(" ");
 		long timeToTreat = Long.parseLong(lineSplits[0]);
-		ToolType[] toolsRequired = ParsePatientToolsRequired(lineSplits);
+		ArrayList<ToolType> toolsRequired = ParsePatientToolsRequired(lineSplits);
 		Patient patient = new Patient(timeToTreat, toolsRequired);
 		return patient;
 	}
 	
-	private ToolType[] ParsePatientToolsRequired(String[] lineSplits) {
-		ToolType[] toolsRequired = new ToolType[3];
-		for (int i = 1; i < 4; i++) {
+	private ArrayList<ToolType> ParsePatientToolsRequired(String[] lineSplits) {
+		ArrayList<ToolType> toolsRequired = new ArrayList<ToolType>();
+		for (int i = 0; i < lineSplits.length; i++) {
 			switch (lineSplits[i]) {
 			case "monitor":
-				toolsRequired[i-1] = ToolType.MONITOR;
+				toolsRequired.add(ToolType.MONITOR);
 				break;
 			case "scope":
-				toolsRequired[i-1] = ToolType.SCOPE;
+				toolsRequired.add(ToolType.SCOPE);
 				break;
 			case "needle":
-				toolsRequired[i-1] = ToolType.NEEDLE;
+				toolsRequired.add(ToolType.NEEDLE);
 				break;
 			}
 		}

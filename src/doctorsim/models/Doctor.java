@@ -1,5 +1,6 @@
 package doctorsim.models;
 
+import java.util.ArrayList;
 import java.util.Queue;
 
 public class Doctor extends Thread {
@@ -40,11 +41,12 @@ public class Doctor extends Thread {
     }
     
     private void returnTools() {
-        ToolType[] requiredTools = currentPatient.getToolsRequired();
+        ArrayList<ToolType> requiredTools = currentPatient.getToolsRequired();
         
     	synchronized (toolsLock) {
-            for (int iRequiredTool = 0; iRequiredTool < requiredTools.length; iRequiredTool++) {
-                ToolType requiredTool = requiredTools[iRequiredTool];
+    		
+            for (int iRequiredTool = 0; iRequiredTool < requiredTools.size(); iRequiredTool++) {
+                ToolType requiredTool = requiredTools.get(iRequiredTool);
             	
                 for (int iTool = 0; iTool < tools.length; iTool++) {
                     Tool tool = tools[iTool];
@@ -106,10 +108,10 @@ public class Doctor extends Thread {
     }
     
     public void getTools() throws Exception {
-        ToolType[] requiredTools = currentPatient.getToolsRequired();
+    	ArrayList<ToolType> requiredTools = currentPatient.getToolsRequired();
     	
-        for (int iRequiredTool = 0; iRequiredTool < requiredTools.length; iRequiredTool++) {
-            ToolType requiredTool = requiredTools[iRequiredTool];
+        for (int iRequiredTool = 0; iRequiredTool < requiredTools.size(); iRequiredTool++) {
+            ToolType requiredTool = requiredTools.get(iRequiredTool);
             for (int iTool = 0; iTool < tools.length; iTool++) {
                 Tool tool = tools[iTool];
                 boolean onLastTool = iTool == tools.length - 1;
@@ -122,11 +124,11 @@ public class Doctor extends Thread {
     }
     
     private boolean allToolsAvailable() {
-        ToolType[] requiredTools = currentPatient.getToolsRequired();
+    	ArrayList<ToolType> requiredTools = currentPatient.getToolsRequired();
         int toolsFound = 0;
         
-        for (int iRequiredTool = 0; iRequiredTool < requiredTools.length; iRequiredTool++) {
-        	ToolType requiredTool = requiredTools[iRequiredTool];
+        for (int iRequiredTool = 0; iRequiredTool < requiredTools.size(); iRequiredTool++) {
+        	ToolType requiredTool = requiredTools.get(iRequiredTool);
             for (int iTool = 0; iTool < tools.length; iTool++) {
                 Tool tool = tools[iTool];
                 
@@ -135,6 +137,6 @@ public class Doctor extends Thread {
                 }
             }
         }
-        return toolsFound == requiredTools.length;
+        return toolsFound == requiredTools.size();
     }
 }
