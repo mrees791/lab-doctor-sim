@@ -42,7 +42,6 @@ public class FileParser {
 	private void parseFile(String fileName) throws Exception {
 		try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
 			String currentLine;
-			int numEquipment = Integer.parseInt(reader.readLine());
 			tools[0] = ParseToolLine(reader);
 			tools[1] = ParseToolLine(reader);
 			tools[2] = ParseToolLine(reader);

@@ -1,0 +1,6 @@
+monitor 1
+scope 1
+needle 1
+1
+3000
+monitor scope needle
