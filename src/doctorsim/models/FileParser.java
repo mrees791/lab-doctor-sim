@@ -9,7 +9,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 public class FileParser {
-
 	private ArrayList<Patient> patients;
 	private Tool[] tools;
 	
@@ -41,20 +40,26 @@ public class FileParser {
 	
 	private void parseFile(String fileName) throws Exception {
 		try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-			tools[0] = ParseToolLine(reader);
-			tools[1] = ParseToolLine(reader);
-			tools[2] = ParseToolLine(reader);
-			int patientAmount = Integer.parseInt(reader.readLine());
-			
-			for (int iPatient = 0; iPatient < patientAmount; iPatient++) {
-				patients.add(ParsePatientLine(reader));
-			}
+			parseAllToolLines(reader);
+			parseAllPatientLines(reader);
+		}
+	}
+
+	private void parseAllPatientLines(BufferedReader reader) throws Exception {
+		String patientLine = "";
+		while ((patientLine = reader.readLine()) != null) {
+			patients.add(parsePatientLine(patientLine));
 		}
 	}
 	
-	private Tool ParseToolLine(BufferedReader reader) throws Exception {
+	private void parseAllToolLines(BufferedReader reader) throws Exception {
+		tools[0] = parseToolLine(reader);
+		tools[1] = parseToolLine(reader);
+		tools[2] = parseToolLine(reader);
+	}
+	
+	private Tool parseToolLine(BufferedReader reader) throws Exception {
 		String[] splits = reader.readLine().split(" ");
-		
 		int quantity = Integer.parseInt(splits[1]);
 				
 		switch (splits[0]) {
@@ -68,15 +73,14 @@ public class FileParser {
 		throw new Exception("Unable to read tool type.");
 	}
 	
-	private Patient ParsePatientLine(BufferedReader reader) throws NumberFormatException, IOException {
-		String[] lineSplits = reader.readLine().split(" ");
+	private Patient parsePatientLine(String patientLine) throws NumberFormatException, IOException {
+		String[] lineSplits = patientLine.split(" ");
 		long timeToTreat = Long.parseLong(lineSplits[0]);
-		ArrayList<ToolType> toolsRequired = ParsePatientToolsRequired(lineSplits);
-		Patient patient = new Patient(timeToTreat, toolsRequired);
-		return patient;
+		ArrayList<ToolType> toolsRequired = parsePatientToolsRequired(lineSplits);
+		return new Patient(timeToTreat, toolsRequired);
 	}
 	
-	private ArrayList<ToolType> ParsePatientToolsRequired(String[] lineSplits) {
+	private ArrayList<ToolType> parsePatientToolsRequired(String[] lineSplits) {
 		ArrayList<ToolType> toolsRequired = new ArrayList<ToolType>();
 		for (int i = 0; i < lineSplits.length; i++) {
 			switch (lineSplits[i]) {

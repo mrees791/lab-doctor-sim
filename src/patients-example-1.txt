@@ -1,6 +1,6 @@
 monitor 1
 scope 1
 needle 1
-2
-3000 needle
+3000 needle monitor
 4000 monitor
+10000 monitor
