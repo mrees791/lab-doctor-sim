@@ -41,14 +41,13 @@ public class FileParser {
 	
 	private void parseFile(String fileName) throws Exception {
 		try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-			String currentLine;
 			tools[0] = ParseToolLine(reader);
 			tools[1] = ParseToolLine(reader);
 			tools[2] = ParseToolLine(reader);
 			int patientAmount = Integer.parseInt(reader.readLine());
 			
 			for (int iPatient = 0; iPatient < patientAmount; iPatient++) {
-				patients.add(ParsePatient(reader));
+				patients.add(ParsePatientLine(reader));
 			}
 		}
 	}
@@ -69,26 +68,26 @@ public class FileParser {
 		throw new Exception("Unable to read tool type.");
 	}
 	
-	private Patient ParsePatient(BufferedReader reader) throws NumberFormatException, IOException {
-		long timeToTreat = Long.parseLong(reader.readLine());
-		ToolType[] toolsRequired = ParseToolsRequiredLine(reader);
+	private Patient ParsePatientLine(BufferedReader reader) throws NumberFormatException, IOException {
+		String[] lineSplits = reader.readLine().split(" ");
+		long timeToTreat = Long.parseLong(lineSplits[0]);
+		ToolType[] toolsRequired = ParsePatientToolsRequired(lineSplits);
 		Patient patient = new Patient(timeToTreat, toolsRequired);
 		return patient;
 	}
 	
-	private ToolType[] ParseToolsRequiredLine(BufferedReader reader) throws IOException {
-		String[] splits = reader.readLine().split(" ");
-		ToolType[] toolsRequired = new ToolType[splits.length];
-		for (int i = 0; i < splits.length; i++) {
-			switch (splits[i]) {
+	private ToolType[] ParsePatientToolsRequired(String[] lineSplits) {
+		ToolType[] toolsRequired = new ToolType[3];
+		for (int i = 1; i < 4; i++) {
+			switch (lineSplits[i]) {
 			case "monitor":
-				toolsRequired[i] = ToolType.MONITOR;
+				toolsRequired[i-1] = ToolType.MONITOR;
 				break;
 			case "scope":
-				toolsRequired[i] = ToolType.SCOPE;
+				toolsRequired[i-1] = ToolType.SCOPE;
 				break;
 			case "needle":
-				toolsRequired[i] = ToolType.NEEDLE;
+				toolsRequired[i-1] = ToolType.NEEDLE;
 				break;
 			}
 		}
