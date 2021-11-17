@@ -9,8 +9,7 @@ public class Tool {
         this.quantity = quantity;
     }
 
-    public ToolType getType()
-    {
+    public ToolType getType() {
         return type;
     }
     
@@ -26,8 +25,7 @@ public class Tool {
     	quantity += 1;
     }
 
-    private void setType(ToolType type)
-    {
+    private void setType(ToolType type) {
         this.type = type;
     }
     
