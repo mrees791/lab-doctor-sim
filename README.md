@@ -48,7 +48,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-A multi-threaded Java program which simulates doctors in a hospital treating patients. It was made for my CPSC-230 Systems Programming course with the goal of implementing parallel programming using shared resources.
+This is a multi-threaded Java program which simulates doctors in a hospital treating patients. It was made for my CPSC-230 Systems Programming course with the goal of implementing parallel programming using shared resources.
 
 ### Built With
 
@@ -75,4 +75,4 @@ Install the Java SE Development Kit.
 
 Michael Rees - mrees791@gmail.com
 
-Project Link: [https://github.com/mrees791/lab-doctor-sim)
+Project Link: [https://github.com/mrees791/lab-doctor-sim](https://github.com/mrees791/lab-doctor-sim)
