@@ -3,14 +3,14 @@ package doctorsim.models;
 /**
  * Represents a tool and the quantity available by the hospital.
  * 
- * @author mrees
+ * @author Michael Rees
  */
 public class Tool {
     private ToolType type;
     private int quantity;
     
     public Tool(ToolType type, int quantity) {
-        this.setType(type);
+    	this.type = type;
         this.quantity = quantity;
     }
 
@@ -28,10 +28,6 @@ public class Tool {
     
     public void placeTool() {
     	quantity += 1;
-    }
-
-    private void setType(ToolType type) {
-        this.type = type;
     }
     
     public boolean toolAvailable() {

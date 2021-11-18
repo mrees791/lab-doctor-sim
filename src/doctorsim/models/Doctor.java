@@ -7,15 +7,13 @@ import java.util.Queue;
  * Represents a doctor who can treat a patient and use tools as needed.
  * Each doctor represents a separate thread.
  * 
- * @author mrees
+ * @author Michael Rees
  */
 public class Doctor extends Thread {
     private Tool[] tools;
     private Patient currentPatient;
     private int idNumber;
     private Object toolsLock;
-    private Object patientLock;
-    private Queue<Patient> patients;
     private boolean seeingPatient;
     
     public int getIdNumber()
@@ -23,12 +21,10 @@ public class Doctor extends Thread {
         return idNumber;
     }
 
-    public Doctor(int idNumber, Tool[] tools, Queue<Patient> patients, Object toolsLock, Object patientLock) {
+    public Doctor(int idNumber, Tool[] tools, Object toolsLock) {
         this.idNumber = idNumber;
         this.tools = tools;
-        this.patients = patients;
         this.toolsLock = toolsLock;
-        this.patientLock = patientLock;
     }
     
     @Override
@@ -50,7 +46,6 @@ public class Doctor extends Thread {
         ArrayList<ToolType> requiredTools = currentPatient.getToolsRequired();
         
     	synchronized (toolsLock) {
-    		
             for (int iRequiredTool = 0; iRequiredTool < requiredTools.size(); iRequiredTool++) {
                 ToolType requiredTool = requiredTools.get(iRequiredTool);
             	
@@ -67,7 +62,6 @@ public class Doctor extends Thread {
     }
     
     private void releasePatient() {
-        
         this.currentPatient = null;
         System.out.printf("Doctor %d released a patient.\n", idNumber);
         seeingPatient = false;
@@ -120,7 +114,6 @@ public class Doctor extends Thread {
             ToolType requiredTool = requiredTools.get(iRequiredTool);
             for (int iTool = 0; iTool < tools.length; iTool++) {
                 Tool tool = tools[iTool];
-                boolean onLastTool = iTool == tools.length - 1;
                 
                 if (tool.getType() == requiredTool) {
                 	tool.takeTool();

@@ -5,9 +5,9 @@ import java.util.Queue;
 import java.util.Scanner;
 
 /**
- * Stores the objects for doctors, available tools, and patients.
+ * Represents a hospital with doctors, available tools, and patients.
  * 
- * @author mrees
+ * @author Michael Rees
  */
 public class Hospital {
 	private int numberOfDoctors;
@@ -93,8 +93,9 @@ public class Hospital {
     
     private void openHospital(int amount) {
         doctors = new Doctor[amount];
+        
         for (int i = 0; i < doctors.length; i++) {
-            doctors[i] = new Doctor(i, tools, patients, toolsLock, patientLock);
+            doctors[i] = new Doctor(i, tools, toolsLock);
             doctors[i].start();
         }
         
