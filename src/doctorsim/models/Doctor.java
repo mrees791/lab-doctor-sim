@@ -3,6 +3,12 @@ package doctorsim.models;
 import java.util.ArrayList;
 import java.util.Queue;
 
+/**
+ * Represents a doctor who can treat a patient and use tools as needed.
+ * Each doctor represents a separate thread.
+ * 
+ * @author mrees
+ */
 public class Doctor extends Thread {
     private Tool[] tools;
     private Patient currentPatient;

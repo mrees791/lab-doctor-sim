@@ -11,7 +11,12 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
-public class FileParser {
+/**
+ * Takes a text file with patient data as input and parses it.
+ * 
+ * @author Michael Rees
+ */
+public class PatientFileParser {
 	private ArrayList<Patient> patients;
 	private Tool[] tools;
 	
@@ -23,7 +28,7 @@ public class FileParser {
 		this.tools = tools;
 	}
 
-	public FileParser() {
+	public PatientFileParser() {
 		patients = new ArrayList<Patient>();
 		tools = new Tool[3];
 	}

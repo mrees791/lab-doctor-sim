@@ -2,6 +2,11 @@ package doctorsim.models;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a patient and stores the amount of time they will take to treat and the tools needed to treat them.
+ * 
+ * @author mrees
+ */
 public class Patient {
     private ArrayList<ToolType> toolsRequired;
     private long timeToTreatMs;

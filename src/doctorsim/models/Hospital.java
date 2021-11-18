@@ -4,6 +4,11 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
+/**
+ * Stores the objects for doctors, available tools, and patients.
+ * 
+ * @author mrees
+ */
 public class Hospital {
 	private int numberOfDoctors;
     private Doctor[] doctors;
@@ -26,6 +31,9 @@ public class Hospital {
         treatPatients();
     }
     
+    /**
+     * Explains how to use the program. This is the first thing the user will see.
+     */
     private void showIntro() {
         System.out.println("Doctor Sim Lab");
         System.out.println("To begin, you will need to select a patient file.");
@@ -77,7 +85,7 @@ public class Hospital {
     }
     
     private void initializeToolsAndPatients() {
-    	FileParser file = new FileParser();
+    	PatientFileParser file = new PatientFileParser();
     	file.start();
     	tools = file.getTools();
     	patients.addAll(file.getPatients());

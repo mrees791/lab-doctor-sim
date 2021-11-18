@@ -1,5 +1,10 @@
 package doctorsim.models;
 
+/**
+ * Represents a tool and the quantity available by the hospital.
+ * 
+ * @author mrees
+ */
 public class Tool {
     private ToolType type;
     private int quantity;
