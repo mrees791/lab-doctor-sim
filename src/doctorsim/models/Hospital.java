@@ -2,6 +2,7 @@ package doctorsim.models;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Scanner;
 
 public class Hospital {
 	private int numberOfDoctors;
@@ -12,20 +13,30 @@ public class Hospital {
     private long startTime, endTime;
     
     public Hospital() {
+        toolsLock = new Object();
+        patientLock = new Object();
         numberOfDoctors = 4;
     	patients = new LinkedList<Patient>();
     }
     
     public void start() {
-        toolsLock = new Object();
-        patientLock = new Object();
-        
+        showIntro();
         initializeToolsAndPatients();
-        
-        System.out.printf("Hospital is Open\n");
-        
-        initializeDoctors(numberOfDoctors);
+        openHospital(numberOfDoctors);
         treatPatients();
+    }
+    
+    private void showIntro() {
+        System.out.println("Doctor Sim Lab");
+        System.out.println("To begin, you will need to select a patient file.");
+        System.out.println("A patient file is a text file with the patient data needed for the simulation.");
+        System.out.println("Multiple patient files are included with this program.");
+        promptEnterKey();
+    }
+    
+    private void promptEnterKey() {
+        System.out.println("Press enter to continue.");
+        new Scanner(System.in).nextLine();
     }
     
     private void treatPatients() {
@@ -55,11 +66,13 @@ public class Hospital {
         if (patients.size() > 0) {
             return false;
         }
+        
         for (int iDoctor = 0; iDoctor < doctors.length; iDoctor++) {
             if (doctors[iDoctor].SeeingPatient()) {
                 return false;
             }
         }
+        
         return true;
     }
     
@@ -70,12 +83,13 @@ public class Hospital {
     	patients.addAll(file.getPatients());
     }
     
-    private void initializeDoctors(int amount) {
+    private void openHospital(int amount) {
         doctors = new Doctor[amount];
-        
         for (int i = 0; i < doctors.length; i++) {
             doctors[i] = new Doctor(i, tools, patients, toolsLock, patientLock);
             doctors[i].start();
         }
+        
+        System.out.printf("Hospital is Open\n");
     }
 }

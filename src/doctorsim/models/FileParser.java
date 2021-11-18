@@ -4,7 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.awt.Dialog;
+import java.awt.Dialog.ModalityType;
 
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
@@ -27,7 +30,7 @@ public class FileParser {
 	
 	public void start() {
 		JFileChooser file = new JFileChooser();
-		int chooserResult = file.showOpenDialog(new JFrame());
+		int chooserResult = file.showOpenDialog(createOpenDialog());
 		if (chooserResult == JFileChooser.APPROVE_OPTION) {
 			String fileName = file.getSelectedFile().getAbsolutePath();
 			try {
@@ -36,6 +39,14 @@ public class FileParser {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	private JDialog createOpenDialog() {
+		JDialog openDialog = new JDialog();
+		openDialog.setModal(true);
+		openDialog.setAlwaysOnTop(true);
+		openDialog.setModalityType(ModalityType.APPLICATION_MODAL);
+		return openDialog;
 	}
 	
 	private void parseFile(String fileName) throws Exception {
