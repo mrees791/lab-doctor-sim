@@ -53,6 +53,7 @@ This is a multi-threaded Java program which simulates doctors in a hospital trea
 ### Built With
 
 * [Java SE Development Kit](https://www.oracle.com/java/technologies/downloads/)
+* [Eclipse IDE for Java Developers](https://www.eclipse.org/downloads/packages/)
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -61,14 +62,20 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-Install the Java SE Development Kit.
+Install the Java SE Development Kit and Eclipse IDE for Java Developers.
 
 ### Installation
 
-1. Clone the repo
+1. Clone the repo.
     ```sh
     git clone https://github.com/mrees791/lab-doctor-sim.git
     ```
+2. In Eclipse, select file, import, then select Existing Projects into Workspace.
+3. In the Import Projects wizard, click Browse... next to the Select root directory option.
+4. Select the lab-doctor-sim folder then click Finish.
+5. Run the project in Eclipse.
+
+After starting the program, you will need to select a patient file. A patient file is a text file with the patient data needed for the simulation. There are multiple example patient files located in the bin directory.
 
 <!-- CONTACT -->
 ## Contact
