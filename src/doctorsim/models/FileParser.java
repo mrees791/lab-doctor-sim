@@ -51,9 +51,15 @@ public class FileParser {
 	
 	private void parseFile(String fileName) throws Exception {
 		try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+			skipCommentLine(reader);
 			parseAllToolLines(reader);
+			skipCommentLine(reader);
 			parseAllPatientLines(reader);
 		}
+	}
+	
+	private void skipCommentLine(BufferedReader reader) throws Exception {
+		reader.readLine();
 	}
 
 	private void parseAllPatientLines(BufferedReader reader) throws Exception {

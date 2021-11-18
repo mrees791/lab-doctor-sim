@@ -1,0 +1,14 @@
+#tool,quantity
+monitor 4
+scope 5
+needle 3
+#time needed for treatment(ms),tools needed
+10000 monitor scope needle
+5000 monitor
+1000 needle
+2000 needle
+3000 needle
+11000 scope needle
+21000 needle
+8000 monitor scope needle
+15000 scope
